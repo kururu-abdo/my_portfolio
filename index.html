@@ -1,1040 +1,349 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kururu - Personal Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdurrahim Hassan Kururu - Flutter Developer Portfolio</title>
+    <style>
+        :root {
+            --primary: #007bff;
+            --primary-dark: #0056b3;
+            --bg: #f4f4f4;
+            --text: #333;
+            --card: white;
+        }
 
-  <!--
-    - favicon
-  -->
-  <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon">
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
 
-  <!--
-    - custom css link
-  -->
-  <link rel="stylesheet" href="./assets/css/style.css">
+        [lang="ar"] body {
+            direction: rtl;
+            text-align: right;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Better Arabic font fallback */
+        }
 
-  <!--
-    - google font link
-  -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+        header {
+            background: linear-gradient(135deg, var(--primary), #00c6ff);
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            animation: fadeIn 2s ease-in-out;
+            position: relative;
+        }
+
+        .lang-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.3s;
+        }
+
+        .lang-switcher:hover {
+            background: rgba(255,255,255,0.4);
+        }
+
+        [lang="ar"] .lang-switcher {
+            right: auto;
+            left: 20px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid white;
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+
+        .profile-photo:hover {
+            transform: scale(1.1);
+        }
+
+        h1, h2 {
+            margin: 10px 0;
+        }
+
+        section {
+            padding: 50px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            animation: slideUp 1s ease-in-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .skills ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .skills li {
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 20px;
+            transition: background 0.3s;
+        }
+
+        .skills li:hover {
+            background: var(--primary-dark);
+        }
+
+        .experience-item, .project-item {
+            background: var(--card);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .experience-item:hover, .project-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+            section { padding: 30px 10px; }
+        }
+    </style>
 </head>
-
 <body>
+<header>
+        <div class="lang-switcher" onclick="toggleLanguage()">EN / AR</div>
+        <img src="profile.jpg" alt="Abdurrahim Hassan Kururu" class="profile-photo">
+        <h1 data-en="Abdurrahim Hassan Kururu" data-ar="عبدالرحيم حسن كرورو">Abdurrahim Hassan Kururu</h1>
+        <h2 data-en="Flutter Developer" data-ar="مطور فلاتر">Flutter Developer</h2>
+        <p data-en="Experienced Flutter Developer with 5+ years of building and deploying cross-platform mobile apps in healthcare, trading, B2B commerce, and more. Expert in Dart, Flutter, Bloc/Provider/GetX, AI integration, Odoo, Firebase." 
+           data-ar="مطور فلاتر بخبرة تزيد عن 5 سنوات في بناء ونشر تطبيقات متنقلة عابرة المنصات في الرعاية الصحية والتجارة والتجارة B2B وغيرها. خبير في دارت، فلاتر، Bloc/Provider/GetX، دمج الذكاء الاصطناعي، Odoo، Firebase.">
+            Experienced Flutter Developer with 5+ years...
+        </p>
+    </header>
+    <!-- <header>
+        <div class="lang-switcher" onclick="toggleLanguage()">EN / AR</div>
+        <img src="profile.jpg" alt="Abdulrahim Hassan Karoror" class="profile-photo">
+        <h1 data-en="Abdulrahim Hassan Karoror" data-ar="عبدالرحيم حسن كارورور">Abdulrahim Hassan Karoror</h1>
+        <h2 data-en="Flutter Developer" data-ar="مطور فلاتر">Flutter Developer</h2>
+        <p data-en="Experienced Flutter Developer with 5+ years building scalable cross-platform mobile applications. Proficient in Dart, Flutter, state management (Bloc, Provider, GetX), AI/ML integration, and more. Based in Jeddah, Saudi Arabia." 
+           data-ar="مطور فلاتر بخبرة تزيد عن 5 سنوات في بناء تطبيقات متنقلة عابرة المنصات قابلة للتوسع. خبير في دارت، فلاتر، إدارة الحالة (Bloc، Provider، GetX)، دمج الذكاء الاصطناعي، وغيرها. مقيم في جدة، المملكة العربية السعودية.">
+            Experienced Flutter Developer with 5+ years building scalable cross-platform mobile applications...
+        </p>
+    </header> -->
 
-  <!--
-    - #MAIN
-  -->
-
-  <main>
-
-    <!--
-      - #SIDEBAR
-    -->
-
-    <aside class="sidebar" data-sidebar>
-
-      <div class="sidebar-info">
-
-        <figure class="avatar-box">
-          <img src="./assets/images/me.jpg" alt="Abdurrahim Hassan" width="80">
-        </figure>
-
-        <div class="info-content">
-          <h1 class="name" title="Abdurrahim Hassan">ABDLRAHIM HASSAN</h1>
-
-          <p class="title">Flutter developer</p>
-        </div>
-
-        <button class="info_more-btn" data-sidebar-btn>
-          <span>Show Contacts</span>
-
-          <ion-icon name="chevron-down"></ion-icon>
-        </button>
-
-      </div>
-
-      <div class="sidebar-info_more">
-
-        <div class="separator"></div>
-
-        <ul class="contacts-list">
-
-          <li class="contact-item">
-
-            <div class="icon-box">
-              <ion-icon name="mail-outline"></ion-icon>
-            </div>
-
-            <div class="contact-info">
-              <p class="contact-title">Email</p>
-
-              <a href="mailto:abdurrahim.kururu@gmail.com" class="contact-link">abdurrahim.kururu@gmail.com</a>
-            </div>
-
-          </li>
-
-          <li class="contact-item">
-
-            <div class="icon-box">
-              <ion-icon name="phone-portrait-outline"></ion-icon>
-            </div>
-
-            <div class="contact-info">
-              <p class="contact-title">Phone</p>
-
-              <a href="tel:+12133522795" class="contact-link">+966536627478</a>
-            </div>
-
-          </li>
-
-          <li class="contact-item">
-
-            <div class="icon-box">
-              <ion-icon name="calendar-outline"></ion-icon>
-            </div>
-
-            <div class="contact-info">
-              <p class="contact-title">Birthday</p>
-
-              <time datetime="1982-06-23">Jan 1, 1995</time>
-            </div>
-
-          </li>
-
-          <li class="contact-item">
-
-            <div class="icon-box">
-              <ion-icon name="location-outline"></ion-icon>
-            </div>
-
-            <div class="contact-info">
-              <p class="contact-title">Location</p>
-
-              <address>Qasim, Burraydah, Saudi Arabia</address>
-            </div>
-
-          </li>
-
+    <section id="skills" class="skills">
+        <h2 data-en="Skills" data-ar="المهارات">Skills</h2>
+        <ul>
+            <li data-en="Flutter" data-ar="فلاتر">Flutter</li>
+            <li data-en="Dart" data-ar="دارت">Dart</li>
+            <li data-en="Bloc" data-ar="بلوك">Bloc</li>
+            <li data-en="Provider" data-ar="بروفايدر">Provider</li>
+            <li data-en="GetX" data-ar="جيت إكس">GetX</li>
+            <!-- Add remaining skills with data-en / data-ar as needed -->
+            <li data-en="RESTful APIs" data-ar="واجهات RESTful">RESTful APIs</li>
+            <li data-en="Odoo Integration" data-ar="تكامل Odoo">Odoo Integration</li>
+            <li data-en="Firebase" data-ar="فايربيس">Firebase</li>
+            <li data-en="AI/ML Integration" data-ar="دمج الذكاء الاصطناعي">AI/ML Integration</li>
+            <!-- ... continue for all skills from your CV -->
         </ul>
-
-        <div class="separator"></div>
-
-        <ul class="social-list">
-
-          <li class="social-item">
-            <a href="#" class="social-link">
-              <ion-icon name="logo-facebook"></ion-icon>
-            </a>
-          </li>
-
-          <li class="social-item">
-            <a href="#" class="social-link">
-              <ion-icon name="logo-twitter"></ion-icon>
-            </a>
-          </li>
-
-          <li class="social-item">
-            <a href="#" class="social-link">
-              <ion-icon name="logo-instagram"></ion-icon>
-            </a>
-          </li>
-
-        </ul>
-
-      </div>
-
-    </aside>
-
-
-
-
-
-    <!--
-      - #main-content
-    -->
-
-    <div class="main-content">
-
-      <!--
-        - #NAVBAR
-      -->
-
-      <nav class="navbar">
-
-        <ul class="navbar-list">
-
-          <li class="navbar-item">
-            <button class="navbar-link  active" data-nav-link>About</button>
-          </li>
-
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Resume</button>
-          </li>
-
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Portfolio</button>
-          </li>
-
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Blog</button>
-          </li>
-
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Contact</button>
-          </li>
-
-        </ul>
-
-      </nav>
-
-
-
-
-
-      <!--
-        - #ABOUT
-      -->
-
-      <article class="about  active" data-page="about">
-
-        <header>
-          <h2 class="h2 article-title">About me</h2>
-        </header>
-
-        <section class="about-text">
-          <p>
-         Flutter and Dart Developer with 4 years of Experience ,Proficient in Cross-Platform Mobile Development, API Integration, and Clean Architecture.
-
-          </p>
-
-          <p>
-            My job is to build your Mobile app so that it is functional and user-friendly but at the same time attractive.
-            Moreover, I will deliver your apps to all App stores in mean time
-          </p>
-        </section>
-
-
-        <!--
-          - service
-        -->
-
-        <section class="service">
-
-          <h3 class="h3 service-title">What i'm doing</h3>
-
-          <ul class="service-list">
-<!-- 
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-design.svg
-                " alt="design icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Web design</h4>
-
-                <p class="service-item-text">
-                  The most modern and high-quality design made at a professional level.
-                </p>
-              </div>
-
-            </li> -->
-
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-dev.svg" alt="Web development icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Dart Backend</h4>
-
-                <p class="service-item-text">
-                  High-quality development of Dart-Frog backend approach to build proffessional server side apps
-                </p>
-              </div>
-
-            </li>
-
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-app.svg" alt="mobile app icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Mobile apps</h4>
-
-                <p class="service-item-text">
-                  Professional development of applications for iOS and Android.
-                </p>
-              </div>
-
-            </li>
-<!--
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-photo.svg" alt="camera icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Photography</h4>
-
-                <p class="service-item-text">
-                  I make high-quality photos of any category at a professional level.
-                </p>
-              </div>
-
-            </li> -->
-
-          </ul>
-
-        </section>
-
-
-        <!--
-          - testimonials
-        -->
-
-        <section class="testimonials">
-
-          <h3 class="h3 testimonials-title">Testimonials</h3>
-
-          <ul class="testimonials-list has-scrollbar">
-
-            <li class="testimonials-item">
-              <div class="content-card" data-testimonials-item>
-
-                <figure class="testimonials-avatar-box">
-                  <img src="./assets/images/avatar-1.png" alt="Daniel lewis" width="60" data-testimonials-avatar>
-                </figure>
-
-                <h4 class="h4 testimonials-item-title" data-testimonials-title>Daniel lewis</h4>
-
-                <div class="testimonials-text" data-testimonials-text>
-                  <p>
-                    Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
-                    lot of experience
-                    and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
-                    consectetur adipiscing
-                    elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
-                  </p>
-                </div>
-
-              </div>
-            </li>
-
-            <li class="testimonials-item">
-              <div class="content-card" data-testimonials-item>
-
-                <figure class="testimonials-avatar-box">
-                  <img src="./assets/images/avatar-2.png" alt="Jessica miller" width="60" data-testimonials-avatar>
-                </figure>
-
-                <h4 class="h4 testimonials-item-title" data-testimonials-title>Jessica miller</h4>
-
-                <div class="testimonials-text" data-testimonials-text>
-                  <p>
-                    Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
-                    lot of experience
-                    and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
-                    consectetur adipiscing
-                    elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
-                  </p>
-                </div>
-
-              </div>
-            </li>
-
-            <li class="testimonials-item">
-              <div class="content-card" data-testimonials-item>
-
-                <figure class="testimonials-avatar-box">
-                  <img src="./assets/images/avatar-3.png" alt="Emily evans" width="60" data-testimonials-avatar>
-                </figure>
-
-                <h4 class="h4 testimonials-item-title" data-testimonials-title>Emily evans</h4>
-
-                <div class="testimonials-text" data-testimonials-text>
-                  <p>
-                    Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
-                    lot of experience
-                    and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
-                    consectetur adipiscing
-                    elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
-                  </p>
-                </div>
-
-              </div>
-            </li>
-
-            <li class="testimonials-item">
-              <div class="content-card" data-testimonials-item>
-
-                <figure class="testimonials-avatar-box">
-                  <img src="./assets/images/avatar-4.png" alt="Henry william" width="60" data-testimonials-avatar>
-                </figure>
-
-                <h4 class="h4 testimonials-item-title" data-testimonials-title>Henry william</h4>
-
-                <div class="testimonials-text" data-testimonials-text>
-                  <p>
-                    Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
-                    lot of experience
-                    and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
-                    consectetur adipiscing
-                    elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
-                  </p>
-                </div>
-
-              </div>
-            </li>
-
-          </ul>
-
-        </section>
-
-
-        <!--
-          - testimonials modal
-        -->
-
-        <div class="modal-container" data-modal-container>
-
-          <div class="overlay" data-overlay></div>
-
-          <section class="testimonials-modal">
-
-            <button class="modal-close-btn" data-modal-close-btn>
-              <ion-icon name="close-outline"></ion-icon>
-            </button>
-
-            <div class="modal-img-wrapper">
-              <figure class="modal-avatar-box">
-                <img src="./assets/images/avatar-1.png" alt="Daniel lewis" width="80" data-modal-img>
-              </figure>
-
-              <img src="./assets/images/icon-quote.svg" alt="quote icon">
-            </div>
-
-            <div class="modal-content">
-
-              <h4 class="h3 modal-title" data-modal-title>Daniel lewis</h4>
-
-              <time datetime="2021-06-14">14 June, 2021</time>
-
-              <div data-modal-text>
-                <p>
-                  Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
-                  lot of experience
-                  and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
-                  consectetur adipiscing
-                  elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
-                </p>
-              </div>
-
-            </div>
-
-          </section>
-
-        </div>
-
-
-        <!--
-          - clients
-        -->
-<!-- 
-        <section class="clients">
-
-          <h3 class="h3 clients-title">Clients</h3>
-
-          <ul class="clients-list has-scrollbar">
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-1-color.png" alt="client logo">
-              </a>
-            </li>
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-2-color.png" alt="client logo">
-              </a>
-            </li>
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-3-color.png" alt="client logo">
-              </a>
-            </li>
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-4-color.png" alt="client logo">
-              </a>
-            </li>
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-5-color.png" alt="client logo">
-              </a>
-            </li>
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-6-color.png" alt="client logo">
-              </a>
-            </li>
-
-          </ul>
-
-        </section> -->
-
-      </article>
-
-
-
-
-
-      <!--
-        - #RESUME
-      -->
-
-<article class="resume" data-page="resume">
-
-        <header>
-          <h2 class="h2 article-title">Resume</h2>
-        </header>
-
-        <section class="timeline">
-
-          <div class="title-wrapper">
-            <div class="icon-box">
-              <ion-icon name="book-outline"></ion-icon>
-            </div>
-
-            <h3 class="h3">Education</h3>
-          </div>
-
-          <ol class="timeline-list">
-
-            <li class="timeline-item">
-              <h4 class="h4 timeline-item-title">Sudan University of Science and Technology</h4>
-              <span>2012 — 2016</span>
-              <p class="timeline-text">
-                Bachelor's degree in Management Information System. Focused on Database Management, Systems Analysis, and Software Project Management to support enterprise-level decision making.
-              </p>
-            </li>
-
-            <li class="timeline-item">
-              <h4 class="h4 timeline-item-title">Data Science Professional Certificate</h4>
-              <span>Oct 2023</span>
-              <p class="timeline-text">
-                Completed Coursera Professional Specialization. Mastered Python for data science, involving machine learning models and predictive analytics to build data-driven mobile features.
-              </p>
-            </li>
-
-            <li class="timeline-item">
-              <h4 class="h4 timeline-item-title">Data Analytics Professional Certificate</h4>
-              <span>Aug 2023</span>
-              <p class="timeline-text">
-                Completed Coursera Professional Specialization. Proficiency in SQL and R for querying complex databases and interpreting app performance metrics to drive UI/UX improvements.
-              </p>
-            </li>
-
-          </ol>
-
-        </section>
-
-        <section class="timeline">
-
-          <div class="title-wrapper">
-            <div class="icon-box">
-              <ion-icon name="book-outline"></ion-icon>
-            </div>
-
-            <h3 class="h3">Experience</h3>
-          </div>
-
-          <ol class="timeline-list">
-
-            <li class="timeline-item">
-              <h4 class="h4 timeline-item-title">Mobile Developer (Flutter) — FTMS</h4>
-              <span>2025 — Present</span>
-              <p class="timeline-text">
-                Architecting responsive mobile applications using Flutter for Android and iOS. Collaborating with global remote teams within an Agile/Scrum framework to deliver scalable features.
-              </p>
-            </li>
-
-            <li class="timeline-item">
-              <h4 class="h4 timeline-item-title">Mobile Developer (Flutter) — Echo Emaar Trading Company</h4>
-              <span>2023 — 2025</span>
-              <p class="timeline-text">
-                Developed a B2B E-commerce app for wholesale and an internal enterprise app for inventory management, increasing operational productivity by 25%.
-              </p>
-            </li>
-
-            <li class="timeline-item">
-              <h4 class="h4 timeline-item-title">Mobile Developer — CitySoft</h4>
-              <span>2021 — 2023</span>
-              <p class="timeline-text">
-                Spearheaded development of two primary Flutter apps reaching 10,000+ users. Implemented BLoC/Provider resulting in 30% improvement in app stability.
-              </p>
-            </li>
-
-          </ol>
-
-        </section>
-
-        <section class="skill">
-
-          <h3 class="h3 skills-title">My skills</h3>
-
-          <ul class="skills-list content-card">
-
-            <li class="skills-item">
-              <div class="title-wrapper">
-                <h5 class="h5">Flutter & Dart</h5>
-                <data value="100">100%</data>
-              </div>
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 100%;"></div>
-              </div>
-            </li>
-
-            <li class="skills-item">
-              <div class="title-wrapper">
-                <h5 class="h5">Mobile Development</h5>
-                <data value="90">90%</data>
-              </div>
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 90%;"></div>
-              </div>
-            </li>
-
-            <li class="skills-item">
-              <div class="title-wrapper">
-                <h5 class="h5">System Analysis</h5>
-                <data value="100">100%</data>
-              </div>
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 100%;"></div>
-              </div>
-            </li>
-
-            <li class="skills-item">
-              <div class="title-wrapper">
-                <h5 class="h5">Data Analysis</h5>
-                <data value="70">70%</data>
-              </div>
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 70%;"></div>
-              </div>
-            </li>
-
-            <li class="skills-item">
-              <div class="title-wrapper">
-                <h5 class="h5">Python</h5>
-                <data value="70">70%</data>
-              </div>
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 70%;"></div>
-              </div>
-            </li>
-
-          </ul>
-
-        </section>
-
-      </article>
-
-
-
-
-
-
-
-      <!--
-        - #PORTFOLIO
-      -->
-
-      <article class="portfolio" data-page="portfolio">
-
-        <header>
-          <h2 class="h2 article-title">Portfolio</h2>
-        </header>
-
-        <section class="projects">
-
-          <ul class="filter-list">
-
-            <li class="filter-item">
-              <button class="active" data-filter-btn>All</button>
-            </li>
-            <li class="filter-item">
-              <button data-filter-btn>Mobile Applications</button>
-            </li>
-            <li class="filter-item">
-              <button data-filter-btn>Data Analytics</button>
-            </li>
-
-            
-
-            <!-- <li class="filter-item">
-              <button data-filter-btn>Web development</button>
-            </li> -->
-
-          </ul>
-
-          <div class="filter-select-box">
-
-            <button class="filter-select" data-select>
-
-              <div class="select-value" data-selecct-value>Select category</div>
-
-              <div class="select-icon">
-                <ion-icon name="chevron-down"></ion-icon>
-              </div>
-
-            </button>
-
-            <ul class="select-list">
-
-              <li class="select-item">
-                <button data-select-item>All</button>
-              </li>
-              <li class="select-item">
-                <button data-select-item>Mobile Applications</button>
-              </li>
-              <li class="select-item">
-                <button data-select-item>Data Analytics</button>
-              </li>
-
-            
-
-              <!-- <li class="select-item">
-                <button data-select-item>Web development</button>
-              </li> -->
-
+    </section>
+
+    <section id="experience">
+        <h2 data-en="Professional Experience" data-ar="الخبرة المهنية">Professional Experience</h2>
+      <div class="experience-item">
+            <h3 data-en="Flutter Developer" data-ar="مطور فلاتر">Flutter Developer</h3>
+            <p data-en="Future Technologies for Medical Services (FTMS), Al Rass, Saudi Arabia" data-ar="شركة تقنيات المستقبل للخدمات الطبية (FTMS)، الرس، المملكة العربية السعودية">
+                Future Technologies for Medical Services (FTMS), Al Rass, Saudi Arabia
+            </p>
+            <p data-en="September 2025 – December 2025" data-ar="سبتمبر 2025 – ديسمبر 2025">September 2025 – December 2025</p>
+            <ul>
+                <li data-en="Developed FTMS Live & Doctor telemedicine apps with live video and secure features." data-ar="طور تطبيقي FTMS Live و FTMS Doctor للاستشارات الطبية عبر الفيديو الحي والميزات الآمنة.">
+                    Developed FTMS Live & Doctor telemedicine apps with live video and secure features.
+                </li>
             </ul>
-
-          </div>
-
-          <ul class="project-list">
-<li class="project-item  active" data-filter-item data-category="mobile applications">
-              <a href="https://play.google.com/store/apps/details?id=com.emaar.emaar_sales_men">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-10.png" alt="company" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">ECHO EMAAR TRADING COMPANY</h3>
-
-                <p class="project-category">Mobile Applications</p>
-
-              </a>
-            </li>
-            <li class="project-item  active" data-filter-item data-category="mobile applications">
-              <a href="https://github.com/kururu-abdo/car_rental_mobile">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/car_rentals.jpeg" alt="car" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Car rentals app</h3>
-
-                <p class="project-category">Mobile Applications</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="mobile applications">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/watch.png" alt="orizon" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Watch App</h3>
-
-                <p class="project-category">Mobile Applications</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="mobile applications">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/wallet.png" alt="orizon" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Wallet App</h3>
-
-                <p class="project-category">Mobile Applications</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="mobile applications">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/rose.png" alt="orizon" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Rose Store</h3>
-
-                <p class="project-category">Mobile Applications</p>
-
-              </a>
-            </li>
-            <li class="project-item  active" data-filter-item data-category="mobile applications">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/travel.png" alt="orizon" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Travel App</h3>
-
-                <p class="project-category">Mobile Applications</p>
-
-              </a>
-            </li>
-
-
-            <li class="project-item  active" data-filter-item data-category="mobile applications">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/doctor.png" alt="orizon" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Doctor Live App</h3>
-
-                <p class="project-category">Mobile Applications</p>
-
-              </a>
-            </li>
-
-
-
-       
-          </ul>
-
-        </section>
-
-      </article>
-
-
-
-
-
-      <!--
-        - #BLOG
-      -->
-
-      <article class="blog" data-page="blog">
-
-        <header>
-          <h2 class="h2 article-title">Blog</h2>
-        </header>
-
-        <section class="blog-posts">
-
-          <ul class="blog-posts-list">
-
-            <li class="blog-post-item">
-              <a href="https://medium.com/@kururu95/flutter-riverpod-the-first-step-710f79499a12">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/riverpod_article.webp" alt="Design conferences in 2022" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Riverpod Basics</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Dec 24, 2024</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">Riverpod Basics2</h3>
-
-                  <p class="blog-text">
-Rivepod Basics Explanation                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="https://medium.com/@kururu95/glassy-style-with-flutter-40a45fada48e">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/glassy.webp" alt="Design conferences in 2022" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">flutter</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Feb 7, 2023</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">Glassy effect in Flutter</h3>
-
-                  <p class="blog-text">
-Make Glassy effects with Flutter                 </p>
-
-                </div>
-
-              </a>
-            </li>
-            <li class="blog-post-item">
-              <a href="https://medium.com/@kururu95/connect-flutter-to-odoo-ad5ccd637dd">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/odoo_flutter.webp" alt="Design conferences in 2022" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">flutter</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Oct 17, 2022</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">Connect Flutter to odoo Server</h3>
-
-                  <p class="blog-text">
-                    Connect Flutter to odoo Server               </p>
-
-                </div>
-
-              </a>
-            </li>
-
-
-          </ul>
-
-        </section>
-
-      </article>
-
-
-
-
-
-      <!--
-        - #CONTACT
-      -->
-
-      <article class="contact" data-page="contact">
-
-        <header>
-          <h2 class="h2 article-title">Contact</h2>
-        </header>
-
-        <section class="mapbox" data-mapbox>
-          <figure>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d199666.5651251294!2d-121.58334177520186!3d38.56165006739519!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x809ac672b28397f9%3A0x921f6aaa74197fdb!2sSacramento%2C%20CA%2C%20USA!5e0!3m2!1sen!2sbd!4v1647608789441!5m2!1sen!2sbd"
-              width="400" height="300" loading="lazy"></iframe>
-          </figure>
-        </section>
-
-        <section class="contact-form">
-
-          <h3 class="h3 form-title">Contact Form</h3>
-
-          <form action="#" class="form" data-form>
-
-            <div class="input-wrapper">
-              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
-
-              <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
-            </div>
-
-            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
-
-            <button class="form-btn" type="submit" disabled data-form-btn>
-              <ion-icon name="paper-plane"></ion-icon>
-              <span>Send Message</span>
-            </button>
-
-          </form>
-
-        </section>
-
-      </article>
-
-    </div>
-
-  </main>
-
-
-
-
-
-
-  <!--
-    - custom js link
-  -->
-  <script src="./assets/js/script.js"></script>
-
-  <!--
-    - ionicon link
-  -->
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        </div>
+
+        <div class="experience-item">
+            <h3 data-en="Flutter Developer" data-ar="مطور فلاتر">Flutter Developer</h3>
+            <p data-en="Al Ghad Al Mumtaz Information Technology Company, Riyadh, Saudi Arabia" data-ar="شركة الغد الممتاز لتقنية المعلومات، الرياض، المملكة العربية السعودية">
+                Al Ghad Al Mumtaz Information Technology Company, Riyadh, Saudi Arabia
+            </p>
+            <p data-en="August 2024 – June 2025" data-ar="أغسطس 2024 – يونيو 2025">August 2024 – June 2025</p>
+            <ul>
+                <li data-en="Built and deployed multiple high-quality Flutter applications from concept to production, serving diverse client needs across industries." data-ar="بناء ونشر العديد من التطبيقات عالية الجودة باستخدام فلاتر من الفكرة إلى الإنتاج، تخدم احتياجات عملاء متنوعة عبر الصناعات.">
+                    Built and deployed multiple high-quality Flutter applications...
+                </li>
+                <li data-en="Led full-cycle development including UI/UX design, state management (Bloc, Provider, GetX), API integrations, testing, and deployment to Google Play Store and Apple App Store." data-ar="قاد دورة التطوير الكاملة بما في ذلك تصميم UI/UX، إدارة الحالة، تكامل APIs، الاختبار، والنشر على المتاجر.">
+                    Led full-cycle development...
+                </li>
+                <li data-en="Optimized app performance, ensured cross-platform compatibility (iOS/Android), and implemented features like real-time updates, secure authentication, and data handling." data-ar="حسن أداء التطبيقات، ضمن التوافق عبر iOS/Android، ونفذ ميزات مثل التحديثات الفورية والأمان.">
+                    Optimized app performance...
+                </li>
+                <li data-en="Collaborated with stakeholders to deliver pixel-perfect, user-centric apps with clean, maintainable code and CI/CD pipelines." data-ar="تعاون مع أصحاب المصلحة لتقديم تطبيقات مثالية ومركزة على المستخدم مع كود نظيف وخطوط CI/CD.">
+                    Collaborated with stakeholders...
+                </li>
+                <li data-en="Applied data analytics insights (from IBM certifications) to enhance app features, such as user behavior tracking and AI-driven recommendations where applicable." data-ar="طبق رؤى تحليل البيانات (من شهادات IBM) لتحسين ميزات التطبيق مثل تتبع سلوك المستخدم وتوصيات AI.">
+                    Applied data analytics insights...
+                </li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <h3 data-en="Flutter Developer" data-ar="مطور فلاتر">Flutter Developer</h3>
+            <p data-en="ECHO EMAAR TRADING COMPANY, Buraydah, Saudi Arabia" data-ar="شركة إيكو إعمار للتجارة، بريدة، المملكة العربية السعودية">
+                ECHO EMAAR TRADING COMPANY, Buraydah, Saudi Arabia
+            </p>
+            <p data-en="February 2023 – Present" data-ar="فبراير 2023 – حتى الآن">February 2023 – Present</p>
+            <ul>
+                <li data-en="Built ECHO Emaar internal app and ORISA B2B commerce app with full Odoo integration and gamification." data-ar="بنى تطبيق ECHO Emaar الداخلي وتطبيق ORISA للتجارة B2B مع تكامل كامل لـ Odoo ونظام التلعيب.">
+                    Built ECHO Emaar internal app and ORISA B2B commerce app...
+                </li>
+                <li data-en="Applied Bloc, Provider, GetX for maintainable code; integrated AI/ML elements informed by data science knowledge." data-ar="طبق Bloc، Provider، GetX لكود قابل للصيانة؛ دمج عناصر AI/ML مستوحاة من معرفة علم البيانات.">
+                    Applied Bloc, Provider, GetX...
+                </li>
+            </ul>
+        </div>
+        <!-- Add previous experiences similarly -->
+    </section>
+
+ <section id="projects">
+        <h2 data-en="Projects" data-ar="المشاريع">Projects</h2>
+
+        <div class="project-item">
+            <h3 data-en="FTMS Live – Patient Mobile App (Healthcare Telemedicine)" data-ar="FTMS Live – تطبيق المريض (الرعاية الصحية عن بعد)">FTMS Live – Patient Mobile App (Healthcare Telemedicine)</h3>
+            <img src="https://cdn.dribbble.com/userupload/44892237/file/70721ed390e75f03b8f10159d84373c4.png?resize=2048x1536&vertical=center" alt="FTMS Live Patient App - Video Consultation Interface" class="project-image">
+            <p data-en="Cross-platform Flutter app enabling users to connect with doctors for remote consultations via live video calls." data-ar="تطبيق فلاتر عابر المنصات يتيح للمستخدمين التواصل مع الأطباء للاستشارات عن بعد عبر مكالمات فيديو حية.">
+                Cross-platform Flutter app enabling users to connect with doctors...
+            </p>
+            <ul>
+                <li data-en="Implemented real-time video consultation using WebRTC/flutter_webrtc or Agora/Twilio integration." data-ar="تنفيذ استشارات فيديو في الوقت الفعلي باستخدام WebRTC/flutter_webrtc أو Agora/Twilio.">Implemented real-time video consultation...</li>
+                <li data-en="Built secure user authentication, doctor search, appointment booking, and chat features." data-ar="بناء مصادقة مستخدم آمنة، بحث الأطباء، حجز المواعيد، وميزات الدردشة.">Built secure user authentication...</li>
+                <li data-en="Managed complex state with Bloc/Provider for smooth UI updates during calls." data-ar="إدارة حالة معقدة بـ Bloc/Provider لتحديثات واجهة سلسة أثناء المكالمات.">Managed complex state...</li>
+                <li data-en="Ensured HIPAA-like privacy and performance on low-bandwidth networks." data-ar="ضمان خصوصية مشابهة لـ HIPAA وأداء على شبكات منخفضة النطاق الترددي.">Ensured HIPAA-like privacy...</li>
+            </ul>
+            <p><strong data-en="Tech:" data-ar="التقنيات:">Tech:</strong> Flutter, Dart, Bloc/Provider/GetX, Firebase/Auth, Video SDK.</p>
+            <p><a href="https://github.com/FtmsCo/ftmscare-mobile-app" target="_blank">GitHub: https://github.com/FtmsCo/ftmscare-mobile-app</a></p>
+        </div>
+
+        <div class="project-item">
+            <h3 data-en="FTMS Doctor – Doctor Mobile App (Healthcare Telemedicine Companion)" data-ar="FTMS Doctor – تطبيق الطبيب (رفيق الرعاية الصحية عن بعد)">FTMS Doctor – Doctor Mobile App (Healthcare Telemedicine Companion)</h3>
+            <img src="https://cdn.dribbble.com/userupload/19133698/file/original-87960dae8f824bafa8cc55ee2ccc8c43.png?resize=1504x1128&vertical=center" alt="FTMS Doctor App - Dashboard & Consultation Interface" class="project-image">
+            <p data-en="Companion Flutter app for doctors to manage patient consultations, accept/reject calls, view history, and provide diagnoses remotely." data-ar="تطبيق فلاتر رفيق للأطباء لإدارة استشارات المرضى، قبول/رفض المكالمات، عرض السجل، وتقديم التشخيص عن بعد.">
+                Companion Flutter app for doctors...
+            </p>
+            <ul>
+                <li data-en="Real-time incoming call handling with push notifications and video streaming." data-ar="معالجة المكالمات الواردة في الوقت الفعلي مع إشعارات وتدفق فيديو.">Real-time incoming call handling...</li>
+                <li data-en="Integrated calendar sync, patient records access, and secure messaging." data-ar="تكامل مزامنة التقويم، الوصول إلى سجلات المرضى، والمراسلة الآمنة.">Integrated calendar sync...</li>
+                <li data-en="Used GetX for lightweight dependency injection and fast navigation." data-ar="استخدام GetX لحقن التبعيات الخفيفة والتنقل السريع.">Used GetX for lightweight...</li>
+                <li data-en="Optimized for tablet/desktop use cases in clinic settings." data-ar="محسن لاستخدام التابلت/ديسكتوب في إعدادات العيادة.">Optimized for tablet/desktop...</li>
+            </ul>
+            <p><strong data-en="Tech:" data-ar="التقنيات:">Tech:</strong> Flutter, Dart, GetX/Bloc, Firebase Cloud Messaging, Video SDK.</p>
+            <p><a href="https://github.com/FtmsCo/ftms-live-doctor-app" target="_blank">GitHub: https://github.com/FtmsCo/ftms-live-doctor-app</a></p>
+        </div>
+
+        <div class="project-item">
+            <h3 data-en="ECHO Emaar Trading Company – Internal ERP Mobile App" data-ar="ECHO Emaar Trading Company – التطبيق الداخلي لـ ERP">ECHO Emaar Trading Company – Internal ERP Mobile App</h3>
+            <img src="https://steigerntech.com/wp-content/uploads/2025/05/Your-digital-signature-app-for-odoo.webp" alt="ECHO Emaar Internal ERP App - Inventory & Dashboard View" class="project-image">
+            <p data-en="Internal-use Flutter application connected to Odoo backend for company employees to manage operations on-the-go." data-ar="تطبيق فلاتر داخلي متصل بـ Odoo لإدارة العمليات أثناء التنقل.">
+                Internal-use Flutter application...
+            </p>
+            <ul>
+                <li data-en="Full integration with Odoo via RPC/XML-RPC for real-time data sync (inventory, sales, HR, etc.)." data-ar="تكامل كامل مع Odoo عبر RPC/XML-RPC لمزامنة البيانات في الوقت الفعلي.">Full integration with Odoo...</li>
+                <li data-en="Developed modules for stock checking, order tracking, employee tasks, and reporting." data-ar="تطوير وحدات لفحص المخزون، تتبع الطلبات، مهام الموظفين، والتقارير.">Developed modules for stock checking...</li>
+                <li data-en="Implemented offline support with local caching and sync when online." data-ar="تنفيذ دعم أوفلاين مع تخزين محلي ومزامنة عند الاتصال.">Implemented offline support...</li>
+                <li data-en="Used Provider for state management across complex ERP flows." data-ar="استخدام Provider لإدارة الحالة عبر تدفقات ERP المعقدة.">Used Provider for state management...</li>
+            </ul>
+            <p><strong data-en="Tech:" data-ar="التقنيات:">Tech:</strong> Flutter, Dart, Odoo Integration (odoo-rpc or custom), Provider/Bloc, SQLite (offline).</p>
+            <p><a href="https://github.com/kururu-abdo/echo_emaar_app" target="_blank">GitHub: https://github.com/kururu-abdo/echo_emaar_app</a></p>
+        </div>
+
+        <div class="project-item">
+            <h3 data-en="ORISA – B2B Commerce Mobile App (for ECHO Emaar Trading Company)" data-ar="ORISA – تطبيق التجارة B2B (لشركة ECHO Emaar)">ORISA – B2B Commerce Mobile App (for ECHO Emaar Trading Company)</h3>
+            <img src="https://triggerbee.com/wp-content/uploads/tbimages/2025/02/Gamification-header.png" alt="ORISA B2B App - Gamification & Leaderboard Interface" class="project-image">
+            <p data-en="B2B e-commerce Flutter app allowing business clients to browse products, place bulk orders, and engage via gamification." data-ar="تطبيق فلاتر للتجارة B2B يتيح للعملاء التجاريين تصفح المنتجات، تقديم طلبات بالجملة، والتفاعل عبر التلعيب.">
+                B2B e-commerce Flutter app...
+            </p>
+            <ul>
+                <li data-en="Connected seamlessly to Odoo backend for product catalog, pricing, orders, invoices, and inventory." data-ar="اتصال سلس بـ Odoo لكتالوج المنتجات، التسعير، الطلبات، الفواتير، والمخزون.">Connected seamlessly to Odoo...</li>
+                <li data-en="Built gamification system: earn points on purchases/actions, redeem for discounts/rewards." data-ar="بناء نظام تلعيب: كسب نقاط على المشتريات/الإجراءات، استبدالها بخصومات/مكافآت.">Built gamification system...</li>
+                <li data-en="Features include cart management, order history, real-time pricing updates, and notifications." data-ar="ميزات تشمل إدارة السلة، سجل الطلبات، تحديثات التسعير الفورية، والإشعارات.">Features include cart management...</li>
+                <li data-en="Used Bloc for scalable state handling in shopping flows and GetX for performance." data-ar="استخدام Bloc لإدارة حالة قابلة للتوسع و GetX للأداء.">Used Bloc for scalable state...</li>
+            </ul>
+            <p><strong data-en="Tech:" data-ar="التقنيات:">Tech:</strong> Flutter, Dart, Bloc/GetX, Odoo RPC, Gamification Logic, Firebase Notifications.</p>
+            <p><a href="https://github.com/kururu-abdo/orisa" target="_blank">GitHub: https://github.com/kururu-abdo/orisa</a></p>
+        </div>
+    </section>
+
+    <!-- Add Certifications, Languages sections similarly with data-en/data-ar -->
+
+    <footer>
+        <p data-en="Contact: abdurrahim.kururu@gmail.com | LinkedIn | GitHub" data-ar="التواصل: abdurrahيم.kururu@gmail.com | لينكدإن | جيت‌هب">
+            Contact: abdurrahim.kururu@gmail.com | LinkedIn | GitHub
+        </p>
+        <p data-en="&copy; 2026 Abdurrahim Hassan Kururu" data-ar="&copy; 2026 عبدالرحيم حسن كرورو">
+            &copy; 2026 Abdurrahim Hassan Kururu
+        </p>
+    </footer>
+
+    <script>
+        function toggleLanguage() {
+            const html = document.documentElement;
+            const currentLang = html.getAttribute('lang');
+            const newLang = currentLang === 'ar' ? 'en' : 'ar';
+            
+            html.setAttribute('lang', newLang);
+            html.setAttribute('dir', newLang === 'ar' ? 'rtl' : 'ltr');
+            
+            // Update all translatable elements
+            document.querySelectorAll('[data-en][data-ar]').forEach(el => {
+                el.textContent = newLang === 'ar' ? el.getAttribute('data-ar') : el.getAttribute('data-en');
+            });
+        }
+
+        // Optional: Set initial language based on browser preference
+        if (navigator.language.startsWith('ar')) {
+            toggleLanguage();
+        }
+    </script>
 
 </body>
-
 </html>
+
