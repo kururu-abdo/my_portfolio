@@ -1,349 +1,570 @@
+
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abdurrahim Hassan Kururu - Flutter Developer Portfolio</title>
-    <style>
-        :root {
-            --primary: #007bff;
-            --primary-dark: #0056b3;
-            --bg: #f4f4f4;
-            --text: #333;
-            --card: white;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abdalarahim Hassan — Portfolio</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a0f;--bg2:#12121a;--bg3:#1a1a26;--bg4:#22223a;
+  --purple:#8b5cf6;--purple2:#a78bfa;--purple3:#6d28d9;
+  --cyan:#06b6d4;--cyan2:#22d3ee;
+  --text:#f1f0fb;--text2:#a09ec0;--text3:#6b6890;
+  --border:#2a2840;--border2:#3d3a5c;
+  --glow:0 0 20px rgba(139,92,246,.3);
+  --glow2:0 0 40px rgba(139,92,246,.15);
+  --radius:12px;--radius2:8px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;overflow-x:hidden}
 
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            transition: all 0.3s ease;
-        }
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,15,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{font-size:1.1rem;font-weight:700;background:linear-gradient(135deg,var(--purple2),var(--cyan2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:.9rem;transition:color .2s}
+.nav-links a:hover{color:var(--purple2)}
+.nav-admin{background:transparent;border:1px solid var(--border2);color:var(--text2);padding:.4rem 1rem;border-radius:var(--radius2);cursor:pointer;font-size:.85rem;transition:all .2s}
+.nav-admin:hover{border-color:var(--purple);color:var(--purple2)}
 
-        [lang="ar"] body {
-            direction: rtl;
-            text-align: right;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Better Arabic font fallback */
-        }
+/* SECTIONS */
+section{min-height:100vh;padding:6rem 2rem 4rem;max-width:1100px;margin:0 auto}
 
-        header {
-            background: linear-gradient(135deg, var(--primary), #00c6ff);
-            color: white;
-            text-align: center;
-            padding: 100px 20px;
-            animation: fadeIn 2s ease-in-out;
-            position: relative;
-        }
+/* HERO */
+#hero{display:flex;align-items:center;gap:4rem;padding-top:8rem}
+.hero-text{flex:1}
+.hero-eyebrow{font-size:.85rem;letter-spacing:.15em;color:var(--cyan2);text-transform:uppercase;margin-bottom:1rem}
+.hero-name{font-size:clamp(2.5rem,6vw,4.5rem);font-weight:800;line-height:1.05;margin-bottom:1rem}
+.hero-name span{background:linear-gradient(135deg,var(--purple2),var(--cyan2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-role{font-size:1.2rem;color:var(--text2);margin-bottom:.5rem}
+.hero-loc{font-size:.95rem;color:var(--text3);margin-bottom:2rem}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{background:linear-gradient(135deg,var(--purple3),var(--purple));color:#fff;border:none;padding:.75rem 1.75rem;border-radius:var(--radius2);cursor:pointer;font-size:.95rem;font-weight:600;transition:all .2s;box-shadow:var(--glow);text-decoration:none;display:inline-block}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(139,92,246,.5)}
+.btn-outline{background:transparent;border:1px solid var(--border2);color:var(--text);padding:.75rem 1.75rem;border-radius:var(--radius2);cursor:pointer;font-size:.95rem;transition:all .2s;text-decoration:none;display:inline-block}
+.btn-outline:hover{border-color:var(--purple);color:var(--purple2);background:rgba(139,92,246,.08)}
+.hero-photo-wrap{position:relative;flex-shrink:0}
+.hero-photo{width:280px;height:280px;border-radius:24px;object-fit:cover;position:relative;z-index:1;border:2px solid var(--border2)}
+.hero-glow{position:absolute;inset:-20px;background:radial-gradient(circle,rgba(139,92,246,.3) 0%,transparent 70%);filter:blur(20px);z-index:0}
+.hero-badges{display:flex;gap:.75rem;margin-top:1.5rem;flex-wrap:wrap}
+.badge{background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:.3rem .85rem;font-size:.8rem;color:var(--text2);display:flex;align-items:center;gap:.4rem}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--purple2)}
 
-        .lang-switcher {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255,255,255,0.2);
-            padding: 8px 16px;
-            border-radius: 30px;
-            cursor: pointer;
-            user-select: none;
-            transition: all 0.3s;
-        }
+/* BENTO GRID for stats */
+.bento{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3rem}
+.bento-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;transition:all .25s}
+.bento-card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:var(--glow2)}
+.bento-num{font-size:2rem;font-weight:800;background:linear-gradient(135deg,var(--purple2),var(--cyan2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.bento-label{font-size:.8rem;color:var(--text3);margin-top:.25rem}
 
-        .lang-switcher:hover {
-            background: rgba(255,255,255,0.4);
-        }
+/* ABOUT */
+#about{min-height:auto;padding:5rem 2rem}
+.section-title{font-size:2rem;font-weight:700;margin-bottom:.5rem}
+.section-title span{background:linear-gradient(135deg,var(--purple2),var(--cyan2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.section-line{width:60px;height:3px;background:linear-gradient(90deg,var(--purple),var(--cyan));border-radius:2px;margin-bottom:2rem}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.about-text p{color:var(--text2);line-height:1.8;margin-bottom:1rem;font-size:.97rem}
+.about-stack{display:flex;flex-direction:column;gap:.75rem}
+.stack-item{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius2);padding:1rem 1.25rem;display:flex;align-items:center;gap:.75rem;transition:all .2s}
+.stack-item:hover{border-color:var(--purple);box-shadow:var(--glow2)}
+.stack-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.stack-name{font-size:.9rem;font-weight:600}
+.stack-sub{font-size:.78rem;color:var(--text3)}
 
-        [lang="ar"] .lang-switcher {
-            right: auto;
-            left: 20px;
-        }
+/* TECH STACK */
+#tech{min-height:auto;padding:5rem 2rem}
+.tech-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:1rem;margin-top:2rem}
+.tech-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem 1rem;text-align:center;transition:all .25s;cursor:default}
+.tech-card:hover{border-color:var(--purple2);transform:translateY(-4px);box-shadow:var(--glow)}
+.tech-emoji{font-size:2rem;margin-bottom:.5rem;display:block}
+.tech-name{font-size:.82rem;font-weight:600;color:var(--text)}
+.tech-cat{font-size:.72rem;color:var(--text3);margin-top:.2rem}
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+/* EXPERIENCE TIMELINE */
+#experience{min-height:auto;padding:5rem 2rem}
+.timeline{position:relative;padding-left:2rem}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--purple),var(--cyan),transparent)}
+.tl-item{position:relative;padding-bottom:2.5rem;padding-left:1.5rem}
+.tl-dot{position:absolute;left:-2.5rem;top:.35rem;width:16px;height:16px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--cyan));box-shadow:0 0 12px rgba(139,92,246,.5)}
+.tl-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;transition:all .25s}
+.tl-card:hover{border-color:var(--border2);box-shadow:var(--glow2)}
+.tl-header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem;margin-bottom:.75rem}
+.tl-role{font-size:1rem;font-weight:700}
+.tl-date{font-size:.8rem;color:var(--cyan2);background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.2);padding:.2rem .6rem;border-radius:20px}
+.tl-company{font-size:.88rem;color:var(--purple2);margin-bottom:.75rem;font-weight:500}
+.tl-bullets{list-style:none}
+.tl-bullets li{font-size:.875rem;color:var(--text2);padding:.3rem 0 .3rem 1rem;position:relative;line-height:1.6}
+.tl-bullets li::before{content:'▸';position:absolute;left:0;color:var(--purple2)}
 
-        .profile-photo {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 5px solid white;
-            margin-bottom: 20px;
-            transition: transform 0.3s;
-        }
+/* PROJECTS */
+#projects{min-height:auto;padding:5rem 2rem}
+.proj-filters{display:flex;gap:.75rem;margin-bottom:2rem;flex-wrap:wrap}
+.filter-btn{background:var(--bg3);border:1px solid var(--border);color:var(--text2);padding:.4rem 1rem;border-radius:20px;cursor:pointer;font-size:.82rem;transition:all .2s}
+.filter-btn.active,.filter-btn:hover{border-color:var(--purple);color:var(--purple2);background:rgba(139,92,246,.1)}
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem}
+.proj-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all .25s;cursor:pointer}
+.proj-card:hover{border-color:var(--purple2);transform:translateY(-4px);box-shadow:0 8px 32px rgba(139,92,246,.2)}
+.proj-header{padding:1.25rem 1.25rem .75rem;display:flex;justify-content:space-between;align-items:flex-start}
+.proj-cat-badge{font-size:.72rem;padding:.25rem .6rem;border-radius:12px;font-weight:600}
+.cat-flutter{background:rgba(6,182,212,.15);color:var(--cyan2);border:1px solid rgba(6,182,212,.25)}
+.cat-android{background:rgba(139,92,246,.15);color:var(--purple2);border:1px solid rgba(139,92,246,.25)}
+.cat-ios{background:rgba(251,191,36,.15);color:#fbbf24;border:1px solid rgba(251,191,36,.25)}
+.cat-cross{background:rgba(52,211,153,.15);color:#34d399;border:1px solid rgba(52,211,153,.25)}
+.proj-links{display:flex;gap:.5rem}
+.proj-link{width:28px;height:28px;border-radius:6px;background:var(--bg4);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text3);text-decoration:none;font-size:.8rem;transition:all .2s}
+.proj-link:hover{border-color:var(--purple);color:var(--purple2)}
+.proj-body{padding:0 1.25rem 1.25rem}
+.proj-title{font-size:1rem;font-weight:700;margin-bottom:.5rem}
+.proj-desc{font-size:.82rem;color:var(--text2);line-height:1.6;margin-bottom:.75rem}
+.proj-tech{display:flex;flex-wrap:wrap;gap:.4rem}
+.tech-pill{background:var(--bg4);border:1px solid var(--border);border-radius:10px;padding:.15rem .5rem;font-size:.72rem;color:var(--text3)}
 
-        .profile-photo:hover {
-            transform: scale(1.1);
-        }
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);z-index:200;display:flex;align-items:center;justify-content:center;padding:1rem}
+.modal-box{background:var(--bg2);border:1px solid var(--border2);border-radius:16px;max-width:640px;width:100%;max-height:85vh;overflow-y:auto;padding:2rem}
+.modal-close{float:right;background:var(--bg4);border:1px solid var(--border);color:var(--text2);width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center}
+.modal-close:hover{border-color:var(--purple);color:var(--purple2)}
+.modal-cat{margin-bottom:1rem}
+.modal-title{font-size:1.5rem;font-weight:800;margin-bottom:.75rem;clear:both}
+.modal-desc{color:var(--text2);line-height:1.8;margin-bottom:1rem;font-size:.93rem}
+.modal-section{font-size:.82rem;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem;margin-top:1rem}
+.modal-bullets{list-style:none}
+.modal-bullets li{font-size:.875rem;color:var(--text2);padding:.35rem 0 .35rem 1.25rem;position:relative;line-height:1.6;border-bottom:1px solid var(--border)}
+.modal-bullets li:last-child{border-bottom:none}
+.modal-bullets li::before{content:'✦';position:absolute;left:0;color:var(--purple2);font-size:.65rem;top:.5rem}
+.modal-links{display:flex;gap:.75rem;margin-top:1.5rem;flex-wrap:wrap}
+.modal-link{background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);color:var(--purple2);padding:.5rem 1.1rem;border-radius:var(--radius2);text-decoration:none;font-size:.85rem;transition:all .2s}
+.modal-link:hover{background:rgba(139,92,246,.2)}
 
-        h1, h2 {
-            margin: 10px 0;
-        }
+/* CONTACT */
+#contact{min-height:auto;padding:5rem 2rem 8rem;text-align:center}
+.contact-sub{color:var(--text2);margin:.75rem auto 2.5rem;max-width:480px;line-height:1.7}
+.contact-cards{display:flex;justify-content:center;gap:1.25rem;flex-wrap:wrap}
+.contact-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem 2rem;transition:all .25s;text-decoration:none;min-width:160px;text-align:center}
+.contact-card:hover{border-color:var(--purple);transform:translateY(-3px);box-shadow:var(--glow2)}
+.contact-card-icon{font-size:1.75rem;margin-bottom:.5rem}
+.contact-card-label{font-size:.82rem;color:var(--text3);margin-bottom:.25rem}
+.contact-card-val{font-size:.9rem;color:var(--purple2);font-weight:500}
 
-        section {
-            padding: 50px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            animation: slideUp 1s ease-in-out;
-        }
+/* ADMIN */
+#admin-screen{background:var(--bg);min-height:100vh;padding:2rem}
+.admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.admin-title{font-size:1.5rem;font-weight:700}
+.admin-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:2rem}
+.admin-form-section{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem}
+.admin-form-title{font-size:1rem;font-weight:600;margin-bottom:1.25rem;color:var(--purple2)}
+.form-group{margin-bottom:1rem}
+.form-label{display:block;font-size:.8rem;color:var(--text3);margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.05em}
+.form-input,.form-select,.form-textarea{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius2);padding:.6rem .85rem;color:var(--text);font-size:.9rem;outline:none;transition:border-color .2s;font-family:inherit}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--purple)}
+.form-select{appearance:none}
+.form-textarea{resize:vertical;min-height:80px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.admin-submit{background:linear-gradient(135deg,var(--purple3),var(--purple));color:#fff;border:none;padding:.65rem 1.5rem;border-radius:var(--radius2);cursor:pointer;font-size:.9rem;font-weight:600;transition:all .2s;width:100%;margin-top:.5rem}
+.admin-submit:hover{opacity:.9;transform:translateY(-1px)}
+.admin-projects-list{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem}
+.admin-proj-item{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius2);padding:1rem 1.25rem;margin-bottom:.75rem;display:flex;justify-content:space-between;align-items:flex-start;gap:1rem}
+.admin-proj-info{}
+.admin-proj-name{font-size:.92rem;font-weight:600;margin-bottom:.25rem}
+.admin-proj-cat{font-size:.75rem;color:var(--text3)}
+.admin-proj-actions{display:flex;gap:.5rem;flex-shrink:0}
+.btn-sm{padding:.3rem .7rem;border-radius:6px;cursor:pointer;font-size:.78rem;border:1px solid var(--border);background:var(--bg4);color:var(--text2);transition:all .2s}
+.btn-sm:hover{border-color:var(--purple);color:var(--purple2)}
+.btn-sm.danger:hover{border-color:#ef4444;color:#ef4444}
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+/* LOGIN */
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg)}
+.login-card{background:var(--bg2);border:1px solid var(--border2);border-radius:16px;padding:2.5rem;width:100%;max-width:380px}
+.login-title{font-size:1.3rem;font-weight:700;margin-bottom.5rem;text-align:center}
+.login-sub{color:var(--text3);font-size:.85rem;text-align:center;margin-bottom:1.75rem}
+.login-error{color:#ef4444;font-size:.82rem;margin-bottom:.75rem;background:rgba(239,68,68,.1);padding:.5rem .75rem;border-radius:6px;border:1px solid rgba(239,68,68,.2)}
 
-        .skills ul {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
 
-        .skills li {
-            background: var(--primary);
-            color: white;
-            padding: 10px 20px;
-            margin: 5px;
-            border-radius: 20px;
-            transition: background 0.3s;
-        }
-
-        .skills li:hover {
-            background: var(--primary-dark);
-        }
-
-        .experience-item, .project-item {
-            background: var(--card);
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-
-        .experience-item:hover, .project-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .project-image {
-            width: 100%;
-            max-height: 400px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-
-        @media (max-width: 768px) {
-            section { padding: 30px 10px; }
-        }
-    </style>
+/* FADE IN */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp .6s ease forwards}
+</style>
 </head>
 <body>
-<header>
-        <div class="lang-switcher" onclick="toggleLanguage()">EN / AR</div>
-        <img src="me.jpg" alt="Abdurrahim Hassan Kururu" class="profile-photo">
-        <h1 data-en="Abdurrahim Hassan Kururu" data-ar="عبدالرحيم حسن كرورو">Abdurrahim Hassan Kururu</h1>
-        <h2 data-en="Flutter Developer" data-ar="مطور فلاتر">Flutter Developer</h2>
-        <p data-en="Experienced Flutter Developer with 5+ years of building and deploying cross-platform mobile apps in healthcare, trading, B2B commerce, and more. Expert in Dart, Flutter, Bloc/Provider/GetX, AI integration, Odoo, Firebase." 
-           data-ar="مطور فلاتر بخبرة تزيد عن 5 سنوات في بناء ونشر تطبيقات متنقلة عابرة المنصات في الرعاية الصحية والتجارة والتجارة B2B وغيرها. خبير في دارت، فلاتر، Bloc/Provider/GetX، دمج الذكاء الاصطناعي، Odoo، Firebase.">
-            Experienced Flutter Developer with 5+ years...
-        </p>
-    </header>
-    <!-- <header>
-        <div class="lang-switcher" onclick="toggleLanguage()">EN / AR</div>
-        <img src="profile.jpg" alt="Abdulrahim Hassan Karoror" class="profile-photo">
-        <h1 data-en="Abdulrahim Hassan Karoror" data-ar="عبدالرحيم حسن كارورور">Abdulrahim Hassan Karoror</h1>
-        <h2 data-en="Flutter Developer" data-ar="مطور فلاتر">Flutter Developer</h2>
-        <p data-en="Experienced Flutter Developer with 5+ years building scalable cross-platform mobile applications. Proficient in Dart, Flutter, state management (Bloc, Provider, GetX), AI/ML integration, and more. Based in Jeddah, Saudi Arabia." 
-           data-ar="مطور فلاتر بخبرة تزيد عن 5 سنوات في بناء تطبيقات متنقلة عابرة المنصات قابلة للتوسع. خبير في دارت، فلاتر، إدارة الحالة (Bloc، Provider، GetX)، دمج الذكاء الاصطناعي، وغيرها. مقيم في جدة، المملكة العربية السعودية.">
-            Experienced Flutter Developer with 5+ years building scalable cross-platform mobile applications...
-        </p>
-    </header> -->
 
-    <section id="skills" class="skills">
-        <h2 data-en="Skills" data-ar="المهارات">Skills</h2>
-        <ul>
-            <li data-en="Flutter" data-ar="فلاتر">Flutter</li>
-            <li data-en="Dart" data-ar="دارت">Dart</li>
-            <li data-en="Bloc" data-ar="Bloc">Bloc</li>
-            <li data-en="Provider" data-ar="Provider">Provider</li>
-            <li data-en="GetX" data-ar="GetX">GetX</li>
-            <!-- Add remaining skills with data-en / data-ar as needed -->
-            <li data-en="RESTful APIs" data-ar="RESTful APIs">RESTful APIs</li>
-            <li data-en="Odoo Integration" data-ar="تكامل Odoo">Odoo Integration</li>
-            <li data-en="Firebase" data-ar="فايربيس">Firebase</li>
-            <li data-en="AI/ML Integration" data-ar="دمج الذكاء الاصطناعي">AI/ML Integration</li>
-            <!-- ... continue for all skills from your CV -->
-        </ul>
-    </section>
+<div id="root"></div>
 
-    <section id="experience">
-        <h2 data-en="Professional Experience" data-ar="الخبرة المهنية">Professional Experience</h2>
-      <div class="experience-item">
-            <h3 data-en="Flutter Developer" data-ar="مطور فلاتر">Flutter Developer</h3>
-            <p data-en="Future Technologies for Medical Services (FTMS), Al Rass, Saudi Arabia" data-ar="شركة تقنيات المستقبل للخدمات الطبية (FTMS)، الرس، المملكة العربية السعودية">
-                Future Technologies for Medical Services (FTMS), Al Rass, Saudi Arabia
-            </p>
-            <p data-en="September 2025 – December 2025" data-ar="سبتمبر 2025 – ديسمبر 2025">September 2025 – December 2025</p>
-            <ul>
-                <li data-en="Developed FTMS Live & Doctor telemedicine apps with live video and secure features." data-ar="طور تطبيقي FTMS Live و FTMS Doctor للاستشارات الطبية عبر الفيديو الحي والميزات الآمنة.">
-                    Developed FTMS Live & Doctor telemedicine apps with live video and secure features.
-                </li>
-            </ul>
+<script>
+const PHOTO = "data:image/jpeg;base64,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";
+
+const INITIAL_PROJECTS = [
+  {id:1,title:"Collaborative Event Space Finder",category:"Android",tech:["Kotlin","Jetpack Compose","Hilt","Jetpack Paging 3","Supabase","PostGIS","Google Maps"],desc:"Location-based social mapping app with real-time GPS, custom marker clustering, and infinite pagination of geo-tagged spaces via PostGIS.",highlights:["Decoupled location, network and data layers via Hilt DI for full unit testability","Custom marker clustering with FusedLocationProviderClient — hundreds of spaces without framerate drop","Jetpack Paging 3 against PostGIS Supabase RPC, eliminating full-dataset loads"],github:"https://github.com/kururu-abdo",store:""},
+  {id:2,title:"FinanceTracker",category:"iOS",tech:["SwiftUI","SwiftData","Apple Charts","FaceID","async/await","Swift Concurrency"],desc:"Native iOS offline-first personal finance tracker with biometric security, reactive charts, and zero data loss across crash scenarios.",highlights:["Zero data loss across all simulated background crash scenarios with SwiftData","FaceID biometric auth via LocalAuthentication framework","async/await networking cut UI loading hang-times by 40%"],github:"https://github.com/kururu-abdo",store:""},
+  {id:3,title:"ORISA B2B Commerce App",category:"Flutter",tech:["Flutter","Dart","Bloc","GetX","Odoo RPC","Firebase FCM","Fastlane","GitHub Actions"],desc:"B2B e-commerce Flutter app with full Odoo ERP integration, gamification engine, and automated CI/CD pipeline.",highlights:["Full Odoo RPC integration for catalog, bulk orders, invoicing and real-time inventory","Gamification rewards engine (points, redemption, discounts) increasing repeat purchases","Fastlane + GitHub Actions CI/CD — days to minutes release cycle"],github:"https://github.com/kururu-abdo/orisa",store:""},
+  {id:4,title:"FTMS Live & FTMS Doctor",category:"Flutter",tech:["Flutter","Dart","WebRTC","Agora SDK","Bloc","Firebase Auth","FCM"],desc:"Paired telemedicine platform — patient and physician apps with real-time WebRTC video, built for rural low-bandwidth healthcare.",highlights:["WebRTC/Agora with adaptive bitrate for stable video on 3G","HIPAA-inspired security: AES-encrypted storage + OAuth 2.0","FCM real-time push for incoming call alerts on rural networks"],github:"https://github.com/FtmsCo/ftmscare-mobile-app",store:""},
+  {id:5,title:"ECHO Emaar Internal ERP App",category:"Flutter",tech:["Flutter","Dart","Odoo RPC","Provider","Bloc","SQLite"],desc:"Enterprise offline-first mobile app connecting 50+ employees to Odoo ERP for real-time inventory, sales and HR data.",highlights:["Full Odoo XML-RPC integration across inventory, sales and HR modules","Offline-first SQLite caching with background sync — zero downtime in warehouses","Standardised Bloc/GetX/Provider state management across two codebases"],github:"https://github.com/kururu-abdo/echo_emaar_app",store:""}
+];
+
+// State
+let page = 'portfolio'; // 'portfolio' | 'login' | 'admin'
+let loggedIn = false;
+let projects = JSON.parse(localStorage.getItem('portfolio_projects') || 'null') || INITIAL_PROJECTS;
+let nextId = Math.max(...projects.map(p=>p.id)) + 1;
+let filter = 'All';
+let modal = null;
+let editingId = null;
+
+function saveProjects(){localStorage.setItem('portfolio_projects', JSON.stringify(projects));}
+
+function catClass(c){
+  if(c==='Flutter') return 'cat-flutter';
+  if(c==='Android') return 'cat-android';
+  if(c==='iOS') return 'cat-ios';
+  return 'cat-cross';
+}
+
+function render(){
+  const root = document.getElementById('root');
+  if(page==='login'){root.innerHTML = renderLogin(); bindLogin(); return;}
+  if(page==='admin'){root.innerHTML = renderAdmin(); bindAdmin(); return;}
+  root.innerHTML = renderPortfolio();
+  bindPortfolio();
+}
+
+function renderLogin(){
+  return `<div class="login-wrap">
+    <div class="login-card">
+      <div class="login-title" style="text-align:center;font-size:1.3rem;font-weight:700;margin-bottom:.35rem">Admin Panel</div>
+      <div class="login-sub">Enter your credentials to continue</div>
+      <div id="login-err" style="display:none" class="login-error">Incorrect password</div>
+      <div class="form-group"><label class="form-label">Password</label><input type="password" class="form-input" id="pw" placeholder="Enter admin password" /></div>
+      <button class="admin-submit" id="login-btn">Sign in</button>
+      <button class="btn-outline" onclick="page='portfolio';render()" style="width:100%;margin-top:.75rem;text-align:center">← Back to Portfolio</button>
+    </div>
+  </div>`;
+}
+
+function bindLogin(){
+  document.getElementById('login-btn').onclick = () => {
+    const pw = document.getElementById('pw').value;
+    if(pw==='admin123'){loggedIn=true;page='admin';render();}
+    else{document.getElementById('login-err').style.display='block';}
+  };
+  document.getElementById('pw').addEventListener('keyup',e=>{if(e.key==='Enter')document.getElementById('login-btn').click();});
+}
+
+function renderAdmin(){
+  const editProj = editingId ? projects.find(p=>p.id===editingId) : null;
+  return `<div id="admin-screen">
+    <div class="admin-header">
+      <div class="admin-title">⚡ Admin Dashboard</div>
+      <div style="display:flex;gap:.75rem">
+        <button class="btn-sm" onclick="page='portfolio';render()">← Portfolio</button>
+        <button class="btn-sm" onclick="loggedIn=false;page='login';render()">Sign out</button>
+      </div>
+    </div>
+    <div class="admin-grid">
+      <div class="admin-form-section">
+        <div class="admin-form-title">${editProj?'✏️ Edit Project':'+ Add New Project'}</div>
+        <div class="form-group"><label class="form-label">Project Title</label><input class="form-input" id="f-title" value="${editProj?editProj.title:''}" placeholder="My Awesome App" /></div>
+        <div class="form-group"><label class="form-label">Category</label>
+          <select class="form-select" id="f-cat">
+            ${['Flutter','Android','iOS','Cross-Platform'].map(c=>`<option value="${c}" ${editProj&&editProj.category===c?'selected':''}>${c}</option>`).join('')}
+          </select></div>
+        <div class="form-group"><label class="form-label">Tech Stack (comma separated)</label><input class="form-input" id="f-tech" value="${editProj?editProj.tech.join(', '):''}" placeholder="Flutter, Firebase, Bloc" /></div>
+        <div class="form-group"><label class="form-label">Description</label><textarea class="form-textarea" id="f-desc">${editProj?editProj.desc:''}</textarea></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">GitHub URL</label><input class="form-input" id="f-gh" value="${editProj?editProj.github:''}" placeholder="https://github.com/..." /></div>
+          <div class="form-group"><label class="form-label">App Store / Play Store URL</label><input class="form-input" id="f-store" value="${editProj?editProj.store:''}" placeholder="https://apps.apple.com/..." /></div>
         </div>
+        <div class="form-group"><label class="form-label">Key Highlights (one per line)</label><textarea class="form-textarea" id="f-hl" style="min-height:100px">${editProj?editProj.highlights.join('\n'):''}</textarea></div>
+        <button class="admin-submit" id="save-btn">${editProj?'Update Project':'Add Project'}</button>
+        ${editProj?`<button class="btn-sm" style="width:100%;margin-top:.5rem" onclick="editingId=null;render()">Cancel</button>`:''}
+      </div>
+      <div class="admin-projects-list">
+        <div class="admin-form-title" style="margin-bottom:1rem">📱 Projects (${projects.length})</div>
+        ${projects.map(p=>`<div class="admin-proj-item">
+          <div class="admin-proj-info">
+            <div class="admin-proj-name">${p.title}</div>
+            <div class="admin-proj-cat">${p.category} · ${p.tech.slice(0,3).join(', ')}</div>
+          </div>
+          <div class="admin-proj-actions">
+            <button class="btn-sm" data-edit="${p.id}">Edit</button>
+            <button class="btn-sm danger" data-del="${p.id}">Delete</button>
+          </div>
+        </div>`).join('')}
+        ${projects.length===0?'<div style="color:var(--text3);text-align:center;padding:2rem">No projects yet</div>':''}
+      </div>
+    </div>
+  </div>`;
+}
 
-        <div class="experience-item">
-            <h3 data-en="Flutter Developer" data-ar="مطور فلاتر">Flutter Developer</h3>
-            <p data-en="Al Ghad Al Mumtaz Information Technology Company, Riyadh, Saudi Arabia" data-ar="شركة الغد الممتاز لتقنية المعلومات، الرياض، المملكة العربية السعودية">
-                Al Ghad Al Mumtaz Information Technology Company, Riyadh, Saudi Arabia
-            </p>
-            <p data-en="August 2024 – June 2025" data-ar="أغسطس 2024 – يونيو 2025">August 2024 – June 2025</p>
-            <ul>
-                <li data-en="Built and deployed multiple high-quality Flutter applications from concept to production, serving diverse client needs across industries." data-ar="بناء ونشر العديد من التطبيقات عالية الجودة باستخدام فلاتر من الفكرة إلى الإنتاج، تخدم احتياجات عملاء متنوعة عبر الصناعات.">
-                    Built and deployed multiple high-quality Flutter applications...
-                </li>
-                <li data-en="Led full-cycle development including UI/UX design, state management (Bloc, Provider, GetX), API integrations, testing, and deployment to Google Play Store and Apple App Store." data-ar="قاد دورة التطوير الكاملة بما في ذلك تصميم UI/UX، إدارة الحالة، تكامل APIs، الاختبار، والنشر على المتاجر.">
-                    Led full-cycle development...
-                </li>
-                <li data-en="Optimized app performance, ensured cross-platform compatibility (iOS/Android), and implemented features like real-time updates, secure authentication, and data handling." data-ar="حسن أداء التطبيقات، ضمن التوافق عبر iOS/Android، ونفذ ميزات مثل التحديثات الفورية والأمان.">
-                    Optimized app performance...
-                </li>
-                <li data-en="Collaborated with stakeholders to deliver pixel-perfect, user-centric apps with clean, maintainable code and CI/CD pipelines." data-ar="تعاون مع أصحاب المصلحة لتقديم تطبيقات مثالية ومركزة على المستخدم مع كود نظيف وخطوط CI/CD.">
-                    Collaborated with stakeholders...
-                </li>
-                <li data-en="Applied data analytics insights (from IBM certifications) to enhance app features, such as user behavior tracking and AI-driven recommendations where applicable." data-ar="طبق رؤى تحليل البيانات (من شهادات IBM) لتحسين ميزات التطبيق مثل تتبع سلوك المستخدم وتوصيات AI.">
-                    Applied data analytics insights...
-                </li>
-            </ul>
+function bindAdmin(){
+  document.getElementById('save-btn').onclick = () => {
+    const title = document.getElementById('f-title').value.trim();
+    if(!title) return;
+    const obj = {
+      id: editingId || nextId++,
+      title,
+      category: document.getElementById('f-cat').value,
+      tech: document.getElementById('f-tech').value.split(',').map(s=>s.trim()).filter(Boolean),
+      desc: document.getElementById('f-desc').value.trim(),
+      github: document.getElementById('f-gh').value.trim(),
+      store: document.getElementById('f-store').value.trim(),
+      highlights: document.getElementById('f-hl').value.split('\n').map(s=>s.trim()).filter(Boolean)
+    };
+    if(editingId){projects = projects.map(p=>p.id===editingId?obj:p);editingId=null;}
+    else{projects.push(obj);}
+    saveProjects(); render();
+  };
+  document.querySelectorAll('[data-edit]').forEach(btn=>{
+    btn.onclick = ()=>{editingId=parseInt(btn.dataset.edit);render();};
+  });
+  document.querySelectorAll('[data-del]').forEach(btn=>{
+    btn.onclick = ()=>{
+      if(confirm('Delete this project?')){
+        projects = projects.filter(p=>p.id!==parseInt(btn.dataset.del));
+        saveProjects(); render();
+      }
+    };
+  });
+}
+
+function renderPortfolio(){
+  const cats = ['All',...[...new Set(projects.map(p=>p.category))]];
+  const filtered = filter==='All'?projects:projects.filter(p=>p.category===filter);
+  return `
+  <nav>
+    <div class="nav-logo">AH.dev</div>
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#tech">Stack</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-admin" id="nav-admin-btn">Admin ⚙</button>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-text fade-up">
+      <div class="hero-eyebrow">Mobile Systems Engineer</div>
+      <h1 class="hero-name">Abdalarahim<br><span>Hassan</span></h1>
+      <div class="hero-role">Flutter · Android · iOS · Mobile DevOps</div>
+      <div class="hero-loc">📍 Buraydah, Saudi Arabia</div>
+      <div class="hero-btns">
+        <a href="#projects" class="btn-primary">View Projects</a>
+        <a href="#contact" class="btn-outline">Get in Touch</a>
+      </div>
+      <div class="hero-badges">
+        <div class="badge"><span class="badge-dot"></span>5+ Years Experience</div>
+        <div class="badge"><span class="badge-dot" style="background:var(--cyan2)"></span>Production Apps Shipped</div>
+        <div class="badge"><span class="badge-dot" style="background:#fbbf24"></span>IBM Data Science Certified</div>
+      </div>
+    </div>
+    <div class="hero-photo-wrap fade-up">
+      <div class="hero-glow"></div>
+      <img src="${PHOTO}" alt="Abdalarahim Hassan" class="hero-photo" />
+    </div>
+  </section>
+
+  <!-- BENTO STATS -->
+  <div style="max-width:1100px;margin:0 auto;padding:0 2rem 4rem">
+    <div class="bento">
+      <div class="bento-card"><div class="bento-num">5+</div><div class="bento-label">Years in Production Mobile</div></div>
+      <div class="bento-card"><div class="bento-num">${projects.length}</div><div class="bento-label">Portfolio Projects</div></div>
+      <div class="bento-card"><div class="bento-num">4</div><div class="bento-label">Platforms Shipped</div></div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-title">About <span>Me</span></div>
+    <div class="section-line"></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a Mobile Systems Engineer who translates business requirements into scalable technical architecture — evaluating Flutter, Kotlin Multiplatform, and Native based on performance needs, team velocity, and long-term maintainability.</p>
+        <p>Over 5+ years I've architected production systems across healthcare (telemedicine with WebRTC), ERP (Odoo integration), and B2B commerce — always with deep focus on data security, offline resilience, and system longevity.</p>
+        <p>I also operate full Mobile DevOps pipelines with GitHub Actions, Fastlane, and Codemagic — every project I ship has automated build, test, signing, and store deployment.</p>
+        <p>IBM-certified in Data Science and Data Analytics. I write about mobile engineering on Medium.</p>
+      </div>
+      <div class="about-stack">
+        <div class="stack-item"><div class="stack-icon" style="background:rgba(6,182,212,.15)">🎯</div><div><div class="stack-name">Architecture First</div><div class="stack-sub">Clean Architecture · MVVM · Offline-First</div></div></div>
+        <div class="stack-item"><div class="stack-icon" style="background:rgba(139,92,246,.15)">⚡</div><div><div class="stack-name">Mobile DevOps</div><div class="stack-sub">GitHub Actions · Fastlane · Codemagic</div></div></div>
+        <div class="stack-item"><div class="stack-icon" style="background:rgba(251,191,36,.15)">🔐</div><div><div class="stack-name">Security by Design</div><div class="stack-sub">JWT · OAuth 2.0 · FaceID · AES Encryption</div></div></div>
+        <div class="stack-item"><div class="stack-icon" style="background:rgba(52,211,153,.15)">📊</div><div><div class="stack-name">Data-Informed</div><div class="stack-sub">IBM Data Science & Analytics Certified</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH STACK -->
+  <section id="tech">
+    <div class="section-title">Core <span>Tech Stack</span></div>
+    <div class="section-line"></div>
+    <div class="tech-grid">
+      ${[
+        {e:'🐦',n:'Flutter',c:'Cross-Platform'},
+        {e:'🎯',n:'Dart',c:'Language'},
+        {e:'🤖',n:'Kotlin',c:'Android Native'},
+        {e:'🍎',n:'Swift',c:'iOS Native'},
+        {e:'🎨',n:'Jetpack Compose',c:'Android UI'},
+        {e:'📱',n:'SwiftUI',c:'iOS UI'},
+        {e:'🔥',n:'Firebase',c:'Backend'},
+        {e:'🌊',n:'Supabase',c:'Backend'},
+        {e:'🧱',n:'Bloc',c:'State Mgmt'},
+        {e:'⚡',n:'GetX',c:'State Mgmt'},
+        {e:'🛢',n:'SQLite',c:'Local DB'},
+        {e:'🔄',n:'GitHub Actions',c:'CI/CD'},
+        {e:'🚀',n:'Fastlane',c:'CI/CD'},
+        {e:'🏗',n:'Clean Architecture',c:'Pattern'},
+        {e:'🗺',n:'WebRTC',c:'Real-time'},
+        {e:'☁️',n:'Odoo RPC',c:'ERP'},
+      ].map(t=>`<div class="tech-card"><span class="tech-emoji">${t.e}</span><div class="tech-name">${t.n}</div><div class="tech-cat">${t.c}</div></div>`).join('')}
+    </div>
+  </section>
+
+  <!-- EXPERIENCE TIMELINE -->
+  <section id="experience">
+    <div class="section-title"><span>Experience</span> Timeline</div>
+    <div class="section-line"></div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-header"><div class="tl-role">Senior Mobile Systems Engineer</div><div class="tl-date">Feb 2023 – Present</div></div>
+          <div class="tl-company">ECHO Emaar Trading Company · Buraydah, Saudi Arabia · Full-time</div>
+          <ul class="tl-bullets">
+            <li>Architected offline-first ERP mobile system (Flutter + Odoo RPC) for 50+ employees</li>
+            <li>Shipped ORISA B2B commerce app with gamification engine and CI/CD via Fastlane + GitHub Actions</li>
+            <li>Standardised Bloc/GetX/Provider state management across 2 production codebases</li>
+          </ul>
         </div>
-
-        <div class="experience-item">
-            <h3 data-en="Flutter Developer" data-ar="مطور فلاتر">Flutter Developer</h3>
-            <p data-en="ECHO EMAAR TRADING COMPANY, Buraydah, Saudi Arabia" data-ar="شركة إيكو إعمار للتجارة، بريدة، المملكة العربية السعودية">
-                ECHO EMAAR TRADING COMPANY, Buraydah, Saudi Arabia
-            </p>
-            <p data-en="February 2023 – Present" data-ar="فبراير 2023 – حتى الآن">February 2023 – Present</p>
-            <ul>
-                <li data-en="Built ECHO Emaar internal app and ORISA B2B commerce app with full Odoo integration and gamification." data-ar="بنى تطبيق ECHO Emaar الداخلي وتطبيق ORISA للتجارة B2B مع تكامل كامل لـ Odoo ونظام التلعيب.">
-                    Built ECHO Emaar internal app and ORISA B2B commerce app...
-                </li>
-                <li data-en="Applied Bloc, Provider, GetX for maintainable code; integrated AI/ML elements informed by data science knowledge." data-ar="طبق Bloc، Provider، GetX لكود قابل للصيانة؛ دمج عناصر AI/ML مستوحاة من معرفة علم البيانات.">
-                    Applied Bloc, Provider, GetX...
-                </li>
-            </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-header"><div class="tl-role">Mobile Application Developer</div><div class="tl-date">Aug 2024 – Jun 2025</div></div>
+          <div class="tl-company">Al Ghad Al Mumtaz Information Technology · Riyadh · Contract</div>
+          <ul class="tl-bullets">
+            <li>Delivered 6+ Flutter apps end-to-end across multiple industry verticals</li>
+            <li>Built CI/CD pipelines (GitHub Actions + Fastlane + Codemagic) across all client projects</li>
+            <li>Implemented AI-driven recommendation features using IBM Data Science methodology</li>
+          </ul>
         </div>
-        <!-- Add previous experiences similarly -->
-    </section>
-
- <section id="projects">
-        <h2 data-en="Projects" data-ar="المشاريع">Projects</h2>
-
-        <div class="project-item">
-            <h3 data-en="FTMS Live – Patient Mobile App (Healthcare Telemedicine)" data-ar="FTMS Live – تطبيق المريض (الرعاية الصحية عن بعد)">FTMS Live – Patient Mobile App (Healthcare Telemedicine)</h3>
-            <img src="https://cdn.dribbble.com/userupload/44892237/file/70721ed390e75f03b8f10159d84373c4.png?resize=2048x1536&vertical=center" alt="FTMS Live Patient App - Video Consultation Interface" class="project-image">
-            <p data-en="Cross-platform Flutter app enabling users to connect with doctors for remote consultations via live video calls." data-ar="تطبيق فلاتر عابر المنصات يتيح للمستخدمين التواصل مع الأطباء للاستشارات عن بعد عبر مكالمات فيديو حية.">
-                Cross-platform Flutter app enabling users to connect with doctors...
-            </p>
-            <ul>
-                <li data-en="Implemented real-time video consultation using WebRTC/flutter_webrtc or Agora/Twilio integration." data-ar="تنفيذ استشارات فيديو في الوقت الفعلي باستخدام WebRTC/flutter_webrtc أو Agora/Twilio.">Implemented real-time video consultation...</li>
-                <li data-en="Built secure user authentication, doctor search, appointment booking, and chat features." data-ar="بناء مصادقة مستخدم آمنة، بحث الأطباء، حجز المواعيد، وميزات الدردشة.">Built secure user authentication...</li>
-                <li data-en="Managed complex state with Bloc/Provider for smooth UI updates during calls." data-ar="إدارة حالة معقدة بـ Bloc/Provider لتحديثات واجهة سلسة أثناء المكالمات.">Managed complex state...</li>
-                <li data-en="Ensured HIPAA-like privacy and performance on low-bandwidth networks." data-ar="ضمان خصوصية مشابهة لـ HIPAA وأداء على شبكات منخفضة النطاق الترددي.">Ensured HIPAA-like privacy...</li>
-            </ul>
-            <p><strong data-en="Tech:" data-ar="التقنيات:">Tech:</strong> Flutter, Dart, Bloc/Provider/GetX, Firebase/Auth, Video SDK.</p>
-            <p><a href="https://github.com/FtmsCo/ftmscare-mobile-app" target="_blank">GitHub: https://github.com/FtmsCo/ftmscare-mobile-app</a></p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <div class="tl-header"><div class="tl-role">Mobile Application Developer</div><div class="tl-date">Sep 2025 – Dec 2025</div></div>
+          <div class="tl-company">Future Technologies for Medical Services (FTMS) · Al Rass · Contract</div>
+          <ul class="tl-bullets">
+            <li>Architected FTMS Live & FTMS Doctor telemedicine platform with WebRTC/Agora video</li>
+            <li>Designed HIPAA-inspired mobile security architecture with encrypted storage and OAuth 2.0</li>
+            <li>Optimised adaptive bitrate video streaming for 3G rural healthcare networks</li>
+          </ul>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="project-item">
-            <h3 data-en="FTMS Doctor – Doctor Mobile App (Healthcare Telemedicine Companion)" data-ar="FTMS Doctor – تطبيق الطبيب (رفيق الرعاية الصحية عن بعد)">FTMS Doctor – Doctor Mobile App (Healthcare Telemedicine Companion)</h3>
-            <img src="https://cdn.dribbble.com/userupload/19133698/file/original-87960dae8f824bafa8cc55ee2ccc8c43.png?resize=1504x1128&vertical=center" alt="FTMS Doctor App - Dashboard & Consultation Interface" class="project-image">
-            <p data-en="Companion Flutter app for doctors to manage patient consultations, accept/reject calls, view history, and provide diagnoses remotely." data-ar="تطبيق فلاتر رفيق للأطباء لإدارة استشارات المرضى، قبول/رفض المكالمات، عرض السجل، وتقديم التشخيص عن بعد.">
-                Companion Flutter app for doctors...
-            </p>
-            <ul>
-                <li data-en="Real-time incoming call handling with push notifications and video streaming." data-ar="معالجة المكالمات الواردة في الوقت الفعلي مع إشعارات وتدفق فيديو.">Real-time incoming call handling...</li>
-                <li data-en="Integrated calendar sync, patient records access, and secure messaging." data-ar="تكامل مزامنة التقويم، الوصول إلى سجلات المرضى، والمراسلة الآمنة.">Integrated calendar sync...</li>
-                <li data-en="Used GetX for lightweight dependency injection and fast navigation." data-ar="استخدام GetX لحقن التبعيات الخفيفة والتنقل السريع.">Used GetX for lightweight...</li>
-                <li data-en="Optimized for tablet/desktop use cases in clinic settings." data-ar="محسن لاستخدام التابلت/ديسكتوب في إعدادات العيادة.">Optimized for tablet/desktop...</li>
-            </ul>
-            <p><strong data-en="Tech:" data-ar="التقنيات:">Tech:</strong> Flutter, Dart, GetX/Bloc, Firebase Cloud Messaging, Video SDK.</p>
-            <p><a href="https://github.com/FtmsCo/ftms-live-doctor-app" target="_blank">GitHub: https://github.com/FtmsCo/ftms-live-doctor-app</a></p>
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-title">Key <span>Projects</span></div>
+    <div class="section-line"></div>
+    <div class="proj-filters">
+      ${cats.map(c=>`<button class="filter-btn${filter===c?' active':''}" data-cat="${c}">${c}</button>`).join('')}
+    </div>
+    <div class="proj-grid">
+      ${filtered.map(p=>`<div class="proj-card" data-pid="${p.id}">
+        <div class="proj-header">
+          <span class="proj-cat-badge ${catClass(p.category)}">${p.category}</span>
+          <div class="proj-links">
+            ${p.github?`<a href="${p.github}" class="proj-link" target="_blank" onclick="event.stopPropagation()">GH</a>`:''}
+            ${p.store?`<a href="${p.store}" class="proj-link" target="_blank" onclick="event.stopPropagation()">↗</a>`:''}
+          </div>
         </div>
-
-        <div class="project-item">
-            <h3 data-en="ECHO Emaar Trading Company – Internal ERP Mobile App" data-ar="ECHO Emaar Trading Company – التطبيق الداخلي لـ ERP">ECHO Emaar Trading Company – Internal ERP Mobile App</h3>
-            <img src="https://steigerntech.com/wp-content/uploads/2025/05/Your-digital-signature-app-for-odoo.webp" alt="ECHO Emaar Internal ERP App - Inventory & Dashboard View" class="project-image">
-            <p data-en="Internal-use Flutter application connected to Odoo backend for company employees to manage operations on-the-go." data-ar="تطبيق فلاتر داخلي متصل بـ Odoo لإدارة العمليات أثناء التنقل.">
-                Internal-use Flutter application...
-            </p>
-            <ul>
-                <li data-en="Full integration with Odoo via RPC/XML-RPC for real-time data sync (inventory, sales, HR, etc.)." data-ar="تكامل كامل مع Odoo عبر RPC/XML-RPC لمزامنة البيانات في الوقت الفعلي.">Full integration with Odoo...</li>
-                <li data-en="Developed modules for stock checking, order tracking, employee tasks, and reporting." data-ar="تطوير وحدات لفحص المخزون، تتبع الطلبات، مهام الموظفين، والتقارير.">Developed modules for stock checking...</li>
-                <li data-en="Implemented offline support with local caching and sync when online." data-ar="تنفيذ دعم أوفلاين مع تخزين محلي ومزامنة عند الاتصال.">Implemented offline support...</li>
-                <li data-en="Used Provider for state management across complex ERP flows." data-ar="استخدام Provider لإدارة الحالة عبر تدفقات ERP المعقدة.">Used Provider for state management...</li>
-            </ul>
-            <p><strong data-en="Tech:" data-ar="التقنيات:">Tech:</strong> Flutter, Dart, Odoo Integration (odoo-rpc or custom), Provider/Bloc, SQLite (offline).</p>
-            <p><a href="https://github.com/kururu-abdo/echo_emaar_app" target="_blank">GitHub: https://github.com/kururu-abdo/echo_emaar_app</a></p>
+        <div class="proj-body">
+          <div class="proj-title">${p.title}</div>
+          <div class="proj-desc">${p.desc.slice(0,110)}${p.desc.length>110?'…':''}</div>
+          <div class="proj-tech">${p.tech.slice(0,4).map(t=>`<span class="tech-pill">${t}</span>`).join('')}${p.tech.length>4?`<span class="tech-pill">+${p.tech.length-4}</span>`:''}</div>
         </div>
+      </div>`).join('')}
+    </div>
+  </section>
 
-        <div class="project-item">
-            <h3 data-en="ORISA – B2B Commerce Mobile App (for ECHO Emaar Trading Company)" data-ar="ORISA – تطبيق التجارة B2B (لشركة ECHO Emaar)">ORISA – B2B Commerce Mobile App (for ECHO Emaar Trading Company)</h3>
-            <img src="https://triggerbee.com/wp-content/uploads/tbimages/2025/02/Gamification-header.png" alt="ORISA B2B App - Gamification & Leaderboard Interface" class="project-image">
-            <p data-en="B2B e-commerce Flutter app allowing business clients to browse products, place bulk orders, and engage via gamification." data-ar="تطبيق فلاتر للتجارة B2B يتيح للعملاء التجاريين تصفح المنتجات، تقديم طلبات بالجملة، والتفاعل عبر التلعيب.">
-                B2B e-commerce Flutter app...
-            </p>
-            <ul>
-                <li data-en="Connected seamlessly to Odoo backend for product catalog, pricing, orders, invoices, and inventory." data-ar="اتصال سلس بـ Odoo لكتالوج المنتجات، التسعير، الطلبات، الفواتير، والمخزون.">Connected seamlessly to Odoo...</li>
-                <li data-en="Built gamification system: earn points on purchases/actions, redeem for discounts/rewards." data-ar="بناء نظام تلعيب: كسب نقاط على المشتريات/الإجراءات، استبدالها بخصومات/مكافآت.">Built gamification system...</li>
-                <li data-en="Features include cart management, order history, real-time pricing updates, and notifications." data-ar="ميزات تشمل إدارة السلة، سجل الطلبات، تحديثات التسعير الفورية، والإشعارات.">Features include cart management...</li>
-                <li data-en="Used Bloc for scalable state handling in shopping flows and GetX for performance." data-ar="استخدام Bloc لإدارة حالة قابلة للتوسع و GetX للأداء.">Used Bloc for scalable state...</li>
-            </ul>
-            <p><strong data-en="Tech:" data-ar="التقنيات:">Tech:</strong> Flutter, Dart, Bloc/GetX, Odoo RPC, Gamification Logic, Firebase Notifications.</p>
-            <p><a href="https://github.com/kururu-abdo/orisa" target="_blank">GitHub: https://github.com/kururu-abdo/orisa</a></p>
-        </div>
-    </section>
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-title">Get in <span>Touch</span></div>
+    <div class="section-line" style="margin:0 auto 0"></div>
+    <p class="contact-sub">Open to senior mobile engineering roles on-site in Saudi Arabia. Let's build something that lasts.</p>
+    <div class="contact-cards">
+      <a href="mailto:abdurrahim.hassan@gmail.com" class="contact-card">
+        <div class="contact-card-icon">✉️</div>
+        <div class="contact-card-label">Email</div>
+        <div class="contact-card-val">abdurrahim.hassan@gmail.com</div>
+      </a>
+      <a href="https://linkedin.com/in/abdalrahim-hassan" target="_blank" class="contact-card">
+        <div class="contact-card-icon">💼</div>
+        <div class="contact-card-label">LinkedIn</div>
+        <div class="contact-card-val">abdalrahim-hassan</div>
+      </a>
+      <a href="https://github.com/kururu-abdo" target="_blank" class="contact-card">
+        <div class="contact-card-icon">🐙</div>
+        <div class="contact-card-label">GitHub</div>
+        <div class="contact-card-val">kururu-abdo</div>
+      </a>
+      <a href="https://kururu95.medium.com" target="_blank" class="contact-card">
+        <div class="contact-card-icon">✍️</div>
+        <div class="contact-card-label">Medium</div>
+        <div class="contact-card-val">kururu95.medium.com</div>
+      </a>
+    </div>
+  </section>
 
-    <!-- Add Certifications, Languages sections similarly with data-en/data-ar -->
+  ${modal ? renderModal() : ''}
+  `;
+}
 
-    <footer>
-        <p data-en="Contact: abdurrahim.kururu@gmail.com | LinkedIn | GitHub" data-ar="التواصل: abdurrahيم.kururu@gmail.com | لينكدإن | جيت‌هب">
-            Contact: abdurrahim.kururu@gmail.com | LinkedIn | GitHub
-        </p>
-        <p data-en="&copy; 2026 Abdurrahim Hassan Kururu" data-ar="&copy; 2026 عبدالرحيم حسن كرورو">
-            &copy; 2026 Abdurrahim Hassan Kururu
-        </p>
-    </footer>
+function renderModal(){
+  const p = projects.find(pr=>pr.id===modal);
+  if(!p) return '';
+  return `<div class="modal-overlay" id="modal-overlay">
+    <div class="modal-box">
+      <button class="modal-close" id="modal-close">✕</button>
+      <div class="modal-cat"><span class="proj-cat-badge ${catClass(p.category)}">${p.category}</span></div>
+      <div class="modal-title">${p.title}</div>
+      <div class="modal-desc">${p.desc}</div>
+      <div class="modal-section">Key Highlights</div>
+      <ul class="modal-bullets">${p.highlights.map(h=>`<li>${h}</li>`).join('')}</ul>
+      <div class="modal-section">Tech Stack</div>
+      <div class="proj-tech" style="margin-top:.5rem">${p.tech.map(t=>`<span class="tech-pill">${t}</span>`).join('')}</div>
+      <div class="modal-links">
+        ${p.github?`<a href="${p.github}" target="_blank" class="modal-link">GitHub →</a>`:''}
+        ${p.store?`<a href="${p.store}" target="_blank" class="modal-link">App Store / Play Store →</a>`:''}
+      </div>
+    </div>
+  </div>`;
+}
 
-    <script>
-        function toggleLanguage() {
-            const html = document.documentElement;
-            const currentLang = html.getAttribute('lang');
-            const newLang = currentLang === 'ar' ? 'en' : 'ar';
-            
-            html.setAttribute('lang', newLang);
-            html.setAttribute('dir', newLang === 'ar' ? 'rtl' : 'ltr');
-            
-            // Update all translatable elements
-            document.querySelectorAll('[data-en][data-ar]').forEach(el => {
-                el.textContent = newLang === 'ar' ? el.getAttribute('data-ar') : el.getAttribute('data-en');
-            });
-        }
+function bindPortfolio(){
+  document.getElementById('nav-admin-btn').onclick = () => {
+    if(loggedIn){page='admin';render();}
+    else{page='login';render();}
+  };
+  document.querySelectorAll('.filter-btn').forEach(btn=>{
+    btn.onclick = ()=>{filter=btn.dataset.cat;render();};
+  });
+  document.querySelectorAll('.proj-card').forEach(card=>{
+    card.onclick = ()=>{modal=parseInt(card.dataset.pid);render();};
+  });
+  if(modal){
+    document.getElementById('modal-close').onclick = ()=>{modal=null;render();};
+    document.getElementById('modal-overlay').onclick = (e)=>{if(e.target.id==='modal-overlay'){modal=null;render();}};
+  }
+}
 
-        // Optional: Set initial language based on browser preference
-        if (navigator.language.startsWith('ar')) {
-            toggleLanguage();
-        }
-    </script>
-
+render();
+</script>
 </body>
 </html>
-
