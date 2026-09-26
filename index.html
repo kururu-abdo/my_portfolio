@@ -112,6 +112,7 @@ section{min-height:100vh;padding:6rem 2rem 4rem;max-width:1100px;margin:0 auto}
 .cat-android{background:rgba(139,92,246,.15);color:var(--purple2);border:1px solid rgba(139,92,246,.25)}
 .cat-ios{background:rgba(251,191,36,.15);color:#fbbf24;border:1px solid rgba(251,191,36,.25)}
 .cat-cross{background:rgba(52,211,153,.15);color:#34d399;border:1px solid rgba(52,211,153,.25)}
+.cat-ai{background:rgba(6,182,212,.15);color:var(--cyan2);border:1px solid rgba(6,182,212,.25)}
 .proj-links{display:flex;gap:.5rem}
 .proj-link{width:28px;height:28px;border-radius:6px;background:var(--bg4);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text3);text-decoration:none;font-size:.8rem;transition:all .2s}
 .proj-link:hover{border-color:var(--purple);color:var(--purple2)}
@@ -201,14 +202,24 @@ const INITIAL_PROJECTS = [
   {id:2,title:"FinanceTracker",category:"iOS",tech:["SwiftUI","SwiftData","Apple Charts","FaceID","async/await","Swift Concurrency"],desc:"Native iOS offline-first personal finance tracker with biometric security, reactive charts, and zero data loss across crash scenarios.",highlights:["Zero data loss across all simulated background crash scenarios with SwiftData","FaceID biometric auth via LocalAuthentication framework","async/await networking cut UI loading hang-times by 40%"],github:"https://github.com/kururu-abdo",store:""},
   {id:3,title:"ORISA B2B Commerce App",category:"Flutter",tech:["Flutter","Dart","Bloc","GetX","Odoo RPC","Firebase FCM","Fastlane","GitHub Actions"],desc:"B2B e-commerce Flutter app with full Odoo ERP integration, gamification engine, and automated CI/CD pipeline.",highlights:["Full Odoo RPC integration for catalog, bulk orders, invoicing and real-time inventory","Gamification rewards engine (points, redemption, discounts) increasing repeat purchases","Fastlane + GitHub Actions CI/CD — days to minutes release cycle"],github:"https://github.com/kururu-abdo/orisa",store:""},
   {id:4,title:"FTMS Live & FTMS Doctor",category:"Flutter",tech:["Flutter","Dart","WebRTC","Agora SDK","Bloc","Firebase Auth","FCM"],desc:"Paired telemedicine platform — patient and physician apps with real-time WebRTC video, built for rural low-bandwidth healthcare.",highlights:["WebRTC/Agora with adaptive bitrate for stable video on 3G","HIPAA-inspired security: AES-encrypted storage + OAuth 2.0","FCM real-time push for incoming call alerts on rural networks"],github:"https://github.com/FtmsCo/ftmscare-mobile-app",store:""},
-  {id:5,title:"ECHO Emaar Internal ERP App",category:"Flutter",tech:["Flutter","Dart","Odoo RPC","Provider","Bloc","SQLite"],desc:"Enterprise offline-first mobile app connecting 50+ employees to Odoo ERP for real-time inventory, sales and HR data.",highlights:["Full Odoo XML-RPC integration across inventory, sales and HR modules","Offline-first SQLite caching with background sync — zero downtime in warehouses","Standardised Bloc/GetX/Provider state management across two codebases"],github:"https://github.com/kururu-abdo/echo_emaar_app",store:""}
+  {id:5,title:"ECHO Emaar Internal ERP App",category:"Flutter",tech:["Flutter","Dart","Odoo RPC","Provider","Bloc","SQLite"],desc:"Enterprise offline-first mobile app connecting 50+ employees to Odoo ERP for real-time inventory, sales and HR data.",highlights:["Full Odoo XML-RPC integration across inventory, sales and HR modules","Offline-first SQLite caching with background sync — zero downtime in warehouses","Standardised Bloc/GetX/Provider state management across two codebases"],github:"https://github.com/kururu-abdo/echo_emaar_app",store:""},
+  {id:6,title:"CodeNerdAI",category:"AI",tech:["Python","OpenAI API","Flutter","Full Stack","Docker"],desc:"A supervised AI coding agent for Flutter and Full Stack projects. It inspects an authorized codebase, proposes changes in a temporary copy, runs configured tests, and presents a diff for human approval before applying edits.",highlights:["Task profiles for Flutter and Full Stack development, with Flutter project detection","Bounded read, write and test loop with isolated Docker test execution","Human review of proposed changes before applying them; online client intake is planned"],github:"",store:""}
 ];
 
 // State
 let page = 'portfolio'; // 'portfolio' | 'login' | 'admin'
 let loggedIn = false;
 let projects = JSON.parse(localStorage.getItem('portfolio_projects') || 'null') || INITIAL_PROJECTS;
-let nextId = Math.max(...projects.map(p=>p.id)) + 1;
+// Add the new portfolio project once for visitors with an older saved project list.
+if(!localStorage.getItem('portfolio_codenerd_seeded')){
+  if(!projects.some(p=>p.title === 'CodeNerdAI')){
+    const nextProjectId = Math.max(0, ...projects.map(p=>p.id)) + 1;
+    projects.push({...INITIAL_PROJECTS.find(p=>p.title === 'CodeNerdAI'), id:nextProjectId});
+    localStorage.setItem('portfolio_projects', JSON.stringify(projects));
+  }
+  localStorage.setItem('portfolio_codenerd_seeded', '1');
+}
+let nextId = Math.max(0, ...projects.map(p=>p.id)) + 1;
 let filter = 'All';
 let modal = null;
 let editingId = null;
@@ -219,6 +230,7 @@ function catClass(c){
   if(c==='Flutter') return 'cat-flutter';
   if(c==='Android') return 'cat-android';
   if(c==='iOS') return 'cat-ios';
+  if(c==='AI') return 'cat-ai';
   return 'cat-cross';
 }
 
